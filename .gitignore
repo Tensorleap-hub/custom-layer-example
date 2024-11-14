@@ -1,0 +1,10 @@
+*.onnx
+*h5
+*.pth
+*.csv
+
+DS_Store
+__pycache__
+*.pyc
+.idea
+.vscode

@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "custom-layer-example"
+version = "0.1.0"
+description = ""
+authors = ["ranhomri <ran.homri@tensorleap.ai>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.9,<3.12"
+code-loader = "^1.0.59"
+tensorflow-macos = "2.11.0"
+torch = "2.0.0"
+torchvision = "0.12.x"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
