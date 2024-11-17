@@ -39,12 +39,7 @@ class TorchMNISTLayer(tf.keras.layers.Layer):
         inputs = inputs.to(device)
 
         with torch.no_grad():
-            x = F.relu(self.torch_model.conv1(inputs))
-            x = F.relu(self.torch_model.conv2(x))
-            x = F.max_pool2d(x, 2)
-            x = self.torch_model.dropout1(x)
-            x = torch.flatten(x, 1)
-            latent = F.relu(self.torch_model.fc1(x))
+            latent = self.torch_model(inputs, embedding=True)
 
         latent = latent.cpu().numpy().astype(np.float32)
         return latent

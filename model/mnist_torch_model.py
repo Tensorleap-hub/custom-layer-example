@@ -11,12 +11,14 @@ class MNISTPyTorchModel(nn.Module):
         self.fc1 = nn.Linear(9216, 128)
         self.fc2 = nn.Linear(128, 10)
 
-    def forward(self, x):
+    def forward(self, x, embedding = False):
         x = F.relu(self.conv1(x))     
         x = F.relu(self.conv2(x))     
         x = F.max_pool2d(x, 2)        
         x = self.dropout1(x)
         x = torch.flatten(x, 1)       
-        x = F.relu(self.fc1(x))       
+        x = F.relu(self.fc1(x))  
+        if embedding:
+            return x     
         x = self.fc2(x)               
         return x
