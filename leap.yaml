@@ -1,8 +1,10 @@
-codeIntegrationId: 673491f4cb518159412bb53b
+codeIntegrationId: 6735e067f92b5e9d3e42224f
 projectId: 673491e5cb518159412bb537
-secretId: 
-entryFile: 'leap_binder.py'
+secretId: ""
+entryFile: leap_binder.py
 include:
-  - leap_binder.py
-  - leap_custom_test.py
-  - custom_layers/*.py
+    - leap_binder.py
+    - custom_layers/*.py
+    - model/mnist_torch_model.py
+    - config.py
+    - config.yaml

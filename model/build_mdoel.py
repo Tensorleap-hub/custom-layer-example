@@ -1,6 +1,6 @@
 import tensorflow as tf
 
-from custom_layers.resnet_custom_layer import TorchResNetLayer
+from custom_layers.mnist_custom_layer import TorchResNetLayer
 
 # Define the input shape
 input_shape = (28, 28, 1)  # Example shape for an RGB image

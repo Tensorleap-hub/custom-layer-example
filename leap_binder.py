@@ -1,3 +1,4 @@
+import os
 from typing import List, Union
 
 import numpy as np
@@ -9,11 +10,15 @@ from code_loader import leap_binder
 from code_loader.contract.datasetclasses import PreprocessResponse 
 from code_loader.contract.enums import Metric, DatasetMetadataType
 from code_loader.contract.visualizer_classes import LeapHorizontalBar
+import torch
 
-from custom_layers.dummy_custom_layer import DummyLayer
-from custom_layers.resnet_custom_layer import TorchResNetLayer
+from config import CONFIG
+from custom_layers.mnist_custom_layer import TorchMNISTLayer
+from model.mnist_torch_model import MNISTPyTorchModel
+from code_loader.inner_leap_binder.leapbinder_decorators import *
 
-# Preprocess Function
+
+@tensorleap_preprocess()
 def preprocess_func() -> List[PreprocessResponse]:
     (train_X, train_Y), (val_X, val_Y) = mnist.load_data()
 
@@ -33,25 +38,21 @@ def preprocess_func() -> List[PreprocessResponse]:
     response = [train, val]
     return response
 
-# Input encoder fetches the image with the index `idx` from the `images` array set in
-# the PreprocessResponse data. Returns a numpy array containing the sample's image. 
+@tensorleap_input_encoder('image')
 def input_encoder(idx: int, preprocess: PreprocessResponse) -> np.ndarray:
     return preprocess.data['images'][idx].astype('float32')
 
-# Ground truth encoder fetches the label with the index `idx` from the `labels` array set in
-# the PreprocessResponse's data. Returns a numpy array containing a hot vector label correlated with the sample.
+@tensorleap_gt_encoder('classes')
 def gt_encoder(idx: int, preprocess: PreprocessResponse) -> np.ndarray:
     return preprocess.data['labels'][idx].astype('float32')
 
-# Dataset binding functions to bind the functions above to the `Dataset Instance`.
-leap_binder.set_preprocess(function=preprocess_func)
-leap_binder.set_input(function=input_encoder, name='image')
-leap_binder.set_ground_truth(function=gt_encoder, name='classes')
+@tensorleap_metadata('digit')
+def metadata(idx: int, preprocess: PreprocessResponse) -> Union[str, int, float]:
+    return np.argmax(preprocess.data['labels'][idx])
 
-leap_binder.set_custom_layer(custom_layer=TorchResNetLayer, name='CustomResNetLayer', 
-                             kernel_index=1, use_custom_latent_space=True)
-leap_binder.set_custom_layer(custom_layer=DummyLayer, name='DummyLayer', 
-                             kernel_index=1, use_custom_latent_space=True)
+
+
+leap_binder.set_custom_layer(custom_layer=TorchMNISTLayer, name='TorchMNISTLayer', use_custom_latent_space=True)
 
 if __name__ == '__main__':
     leap_binder.check()

@@ -5,11 +5,11 @@ class DummyLayer(tf.keras.layers.Layer):
 
     def call(self, inputs):
 
-        return tf.nn.softmax(np.random.rand(1, 10))
+        return tf.nn.softmax(np.random.rand(inputs.shape[0], 10))
 
     # Add the custom latent space method
     def custom_latent_space(self, inputs):
         """
         This method returns a custom latent space representation.
         """
-        return np.random.random((1, 512))
+        return np.random.random((inputs.shape[0], 512))

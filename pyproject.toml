@@ -10,7 +10,8 @@ python = ">=3.9,<3.12"
 code-loader = "^1.0.59"
 tensorflow-macos = "2.11.0"
 torch = "2.0.0"
-torchvision = "0.12.x"
+torchvision = "0.15.1"
+pyyaml = "^6.0.2"
 
 
 [build-system]
