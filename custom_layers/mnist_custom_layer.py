@@ -19,6 +19,10 @@ class TorchMNISTLayer(tf.keras.layers.Layer):
         outputs = tf.nn.softmax(outputs)
         return outputs
 
+    def custom_latent_space(self, inputs):
+        latent = self.run_pytorch_model(inputs, embedding=True)
+        return latent
+    
     def run_pytorch_model(self, inputs, embedding=False):
         inputs = inputs.numpy()
         inputs = np.transpose(inputs, (0, 3, 1, 2))
@@ -31,6 +35,3 @@ class TorchMNISTLayer(tf.keras.layers.Layer):
         outputs = outputs.cpu().numpy().astype(np.float32)
         return outputs
 
-    def custom_latent_space(self, inputs):
-        latent = self.run_pytorch_model(inputs, embedding=True)
-        return latent
