@@ -9,6 +9,7 @@ from config import CONFIG
 class TorchMNISTLayer(tf.keras.layers.Layer):
     def __init__(self):
         super(TorchMNISTLayer, self).__init__()
+        self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         self.torch_model = MNISTPyTorchModel()
         self.torch_model.load_state_dict(torch.load(CONFIG['model_path'], map_location='cpu'))
         self.torch_model.eval()
