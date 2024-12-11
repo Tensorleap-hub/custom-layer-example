@@ -194,13 +194,13 @@ test = ["coverage (>=4.2)", "pytest (>=3.0.3)", "pytest-cov (>=2.4.0)"]
 
 [[package]]
 name = "code-loader"
-version = "1.0.59"
+version = "1.0.62"
 description = ""
 optional = false
 python-versions = "<3.12,>=3.8"
 files = [
-    {file = "code_loader-1.0.59-py3-none-any.whl", hash = "sha256:3e77331fe55defa001f23014b76f84cf861866c60ff9bae524aead70a34ff859"},
-    {file = "code_loader-1.0.59.tar.gz", hash = "sha256:8253ac564764b8cd6200d13d6d904aa9bc3e5f8abede55a862d889083f24047a"},
+    {file = "code_loader-1.0.62-py3-none-any.whl", hash = "sha256:841d0c5861834bdc8153276fd01b6e1f26dfd98cae1eb374e2ea4f956e9d65f4"},
+    {file = "code_loader-1.0.62.tar.gz", hash = "sha256:e4b6f52a6ba0b1373b000be2d4c7505fb968a4c7fd96698aa6558f594d632cab"},
 ]
 
 [package.dependencies]
@@ -1841,4 +1841,4 @@ type = ["pytest-mypy"]
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9,<3.12"
-content-hash = "f797cb4b5aad7013ab0bd5adc0ce1c1ca1cea10caa5684bab0f04709621cac99"
+content-hash = "525603e8194f5562b5150db7cf4c63c7fa986a5e074eea1f1f474304e7e257de"

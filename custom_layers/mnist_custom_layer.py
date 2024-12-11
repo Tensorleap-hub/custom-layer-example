@@ -17,14 +17,14 @@ class TorchMNISTLayer(tf.keras.layers.Layer):
     def call(self, inputs):
         outputs = self.run_pytorch_model(inputs)
         outputs = tf.nn.softmax(outputs)
-        return outputs
+        dummy_output = tf.zeros((1, 3, 4))
+        return [outputs, dummy_output]
 
     def custom_latent_space(self, inputs):
         latent = self.run_pytorch_model(inputs, embedding=True)
         return latent
     
     def run_pytorch_model(self, inputs, embedding=False):
-        inputs = inputs.numpy()
         inputs = np.transpose(inputs, (0, 3, 1, 2))
         inputs = torch.from_numpy(inputs).float()
         device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
